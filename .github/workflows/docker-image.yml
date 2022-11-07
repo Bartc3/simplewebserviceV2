@@ -14,15 +14,18 @@ jobs:
 
     steps:
     
-    - name: Setup maven
-      uses: s4u/setup-maven-action@v1.2.1
+    - name: Setup JDK
+      uses: actions/setup-java@v1
       with:
-        java-version: 8
+        java-version: 16
+        
+    - name: Checkout
+      uses: actions/checkout@v2
         
     - name: Build maven
-      run: mvn verify
-    
-    - uses: actions/checkout@v2
+      run: mvn -B package --file pom.xml
+          cp target/*.jar staging
+  
     - name: Docker login
       env:
         DOCKER_USER: ${{secrets.DOCKER_USER}}
@@ -30,11 +33,12 @@ jobs:
       run: 
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
         
-    - name: Build the Docker image
-      run: docker build -t simplewebservice .
+    - name: Docker build
+      run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/simplewebservicev1
       
-    - name: Tag Docker image
-      run: docker tag simplewebservice ${{secrets.DOCKER_USER}}/simplewebservice
+    - name: Docker push
+      run: docker push ${{secrets.DOCKER_USER}}/simplewebservicev1
+    
+
       
-    - name: Docker Push
-      run: docker push ${{secrets.DOCKER_USER}}/simplewebservice
+        
