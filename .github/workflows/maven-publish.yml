@@ -52,7 +52,7 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     
     - name: Docker build
-      run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/simplewebservicev1
+      run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/simplewebservicev2
         
     - name: Docker push
-      run: docker push ${{secrets.DOCKER_USER}}/simplewebservicev1
+      run: docker push ${{secrets.DOCKER_USER}}/simplewebservicev2
