@@ -24,4 +24,4 @@ jobs:
       run: docker build . --file Dockerfile --tag bartcapellenpxl:$(date +%s)
       
     - name: Docker Push
-      run: docker push ${{secret.DOCKER_USER}}
+      run: docker push ${{secrets.DOCKER_USER}}
