@@ -55,7 +55,7 @@ podTemplate(yaml: '''
           env.TAG = myVersion
           sh '''
             /kaniko/executor --context `pwd` --destination bartcapellenpxl/simplewebservice:$TAG
-            echo -e deployed tomcoolpxl/simplewebservice:$TAG
+            echo -e deployed bartcapellenpxl/simplewebservice:$TAG
           '''
         }
       }
