@@ -13,6 +13,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
+    - name: Setup maven
+      uses: s4u/setup-maven-action@v1.2.1
+      with:
+        java-version: 8
+        
+    - name: Build maven
+      run: mvn verify
+    
     - uses: actions/checkout@v2
     - name: Docker login
       env:
