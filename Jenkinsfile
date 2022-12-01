@@ -1,4 +1,4 @@
-def myVersion = 'UNKNOWN'
+def myVersion = 'X'
 
 podTemplate(yaml: '''
     apiVersion: v1
